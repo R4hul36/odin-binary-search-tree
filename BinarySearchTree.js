@@ -27,9 +27,24 @@ class Tree {
     // console.log(rootNode)
     return rootNode
   }
+
+  insert(root, value) {
+    if (root === null) {
+      return new Node(value)
+    }
+    if (value < root.value) {
+      root.left = this.insert(root.left, value)
+    } else {
+      root.right = this.insert(root.right, value)
+    }
+
+    return root
+  }
 }
 
-const tree = new Tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 15, 22])
+const tree = new Tree([1, 2, 3, 4, 5])
+
+tree.insert(tree.root, 7)
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
