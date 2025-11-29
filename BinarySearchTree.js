@@ -45,7 +45,7 @@ class Tree {
   getPredecessor(preNode) {
     preNode = preNode.left
     while (preNode !== null && preNode.right !== null) {
-      preNode = preNode.left
+      preNode = preNode.right
     }
     return preNode
   }
@@ -67,7 +67,7 @@ class Tree {
       }
       const predecessor = this.getPredecessor(root)
       root.value = predecessor.value
-      root.left = delete (root.left, predecessor.value)
+      root.left = this.delete(root.left, predecessor.value)
     }
     return root
   }
@@ -77,7 +77,7 @@ const tree = new Tree([1, 2, 3, 4, 5, 6, 9])
 
 tree.insert(tree.root, 11)
 
-// tree.delete(tree.root, 2)
+tree.delete(tree.root, 3)
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return
