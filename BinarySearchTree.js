@@ -72,33 +72,57 @@ class Tree {
     return root
   }
   find(root, value) {
-
-    if(root === null) {
+    if (root === null) {
       return null
     }
 
-    if(root.value === value){
-      console.log(root.value);
+    if (root.value === value) {
+      console.log(root.value)
       return root
     }
 
-    if(root.value > value) {
+    if (root.value > value) {
       return this.find(root.left, value)
-    }else {
+    } else {
       return this.find(root.right, value)
     }
     // console.log(root);
+  }
+  levelOrderForEach(callback, root) {
+    if (root === null) {
+      return
+    }
+    let queue = []
+    queue.push(root)
+    while (queue.length > 0) {
+      let frontNode = queue.shift()
+      callback(frontNode.value)
+      if (frontNode.left !== null) {
+        queue.push(frontNode.left)
+      }
+      if (frontNode.right !== null) {
+        queue.push(frontNode.right)
+      }
+    }
+  }
 
+  levelOrderForEachRecursion(callback, root) {
+    if (root === null) {
+      return
+    }
+    callback(root.value)
   }
 }
 
 const tree = new Tree([1, 2, 3, 4, 5, 6, 9])
 
 tree.insert(tree.root, 11)
-let findRoot = tree.find(tree.root, 2)
-console.log(findRoot);
+// let findRoot = tree.find(tree.root, 2)
+// console.log(findRoot)
 
-tree.delete(tree.root, 3)
+tree.levelOrderForEachRecursion((value) => console.log(value), tree.root)
+
+// tree.delete(tree.root, 3)
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return
@@ -113,4 +137,4 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 }
 
-console.log(prettyPrint(findRoot))
+console.log(prettyPrint(tree.root))
