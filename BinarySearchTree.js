@@ -107,19 +107,47 @@ class Tree {
   }
 
   levelOrderForEachRecursion(callback, queue = [this.root]) {
-  
-    if(queue.length ===0) {
+    if (queue.length === 0) {
       return
     }
     let frontNode = queue.shift()
     callback(frontNode.value)
-    if(frontNode.left!== null){
+    if (frontNode.left !== null) {
       queue.push(frontNode.left)
     }
-    if(frontNode.right!== null){
+    if (frontNode.right !== null) {
       queue.push(frontNode.right)
     }
     this.levelOrderForEachRecursion(callback, queue)
+  }
+
+  preOrder(callback, root = this.root) {
+    if (root === null) {
+      return
+    }
+    callback(root.value)
+    this.preOrder(callback, root.left)
+    this.preOrder(callback, root.right)
+  }
+
+  inOrder(callback, root = this.root) {
+    if (root === null) {
+      return
+    }
+
+    this.inOrder(callback, root.left)
+    callback(root.value)
+    this.inOrder(callback, root.right)
+  }
+
+  postOrder(callback, root = this.root) {
+    if (root === null) {
+      return
+    }
+    this.postOrder(callback, root.left)
+
+    this.postOrder(callback, root.right)
+    callback(root.value)
   }
 }
 
@@ -129,8 +157,11 @@ tree.insert(tree.root, 11)
 // let findRoot = tree.find(tree.root, 2)
 // console.log(findRoot)
 
-tree.levelOrderForEachRecursion((value) => console.log(value))
+tree.postOrder((value) => {
+  console.log(value)
+})
 
+// tree.preOrder((value) => console.log(value), tree.root)
 // tree.delete(tree.root, 3)
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
