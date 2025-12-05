@@ -149,6 +149,20 @@ class Tree {
     this.postOrder(callback, root.right)
     callback(root.value)
   }
+
+  depth(root, value, count = 0) {
+    if (root === null) {
+      return null
+    }
+    if (root.value === value) {
+      return count
+    }
+    if (value < root.value) {
+      return this.depth(root.left, value, count + 1)
+    } else if (value > root.value) {
+      return this.depth(root.right, value, count + 1)
+    }
+  }
 }
 
 const tree = new Tree([1, 2, 3, 4, 5, 6, 9])
@@ -158,11 +172,13 @@ tree.insert(tree.root, 11)
 // console.log(findRoot)
 
 tree.postOrder((value) => {
-  console.log(value)
+  // console.log(value)
 })
 
 // tree.preOrder((value) => console.log(value), tree.root)
 // tree.delete(tree.root, 3)
+
+console.log(tree.depth(tree.root, 11))
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return
