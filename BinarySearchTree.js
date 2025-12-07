@@ -163,6 +163,33 @@ class Tree {
       return this.depth(root.right, value, count + 1)
     }
   }
+  findHeight(root) {
+    if(root === null) {
+      return -1
+    }
+
+    let leftHeight = this.findHeight(root.left)+1
+    let rightHeight = this.findHeight(root.right)+1
+    // console.log(leftHeight);
+    
+    return Math.max(leftHeight, rightHeight)
+
+  }
+
+  height(root, value) {
+    if (root === null) {
+      return null
+    }
+    if(value<root.value) {
+      return this.height(root.left, value)
+    }else if(value > root.value) {
+      return this.height(root.right, value)
+    }
+    
+    return this.findHeight(root)
+    
+  }
+
 }
 
 const tree = new Tree([1, 2, 3, 4, 5, 6, 9])
@@ -178,7 +205,7 @@ tree.postOrder((value) => {
 // tree.preOrder((value) => console.log(value), tree.root)
 // tree.delete(tree.root, 3)
 
-console.log(tree.depth(tree.root, 11))
+console.log(tree.height(tree.root, 11))
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return
