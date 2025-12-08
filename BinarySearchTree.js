@@ -189,12 +189,29 @@ class Tree {
     return this.findHeight(root)
     
   }
+  isBalanced(node){
+    if(node === null) {
+      return true
+    }
+    const heigthDifference = this.findHeight(node.left) - this.findHeight(node.right)
+    if(Math.abs(heigthDifference) > 1){
+      return false
+    }
+    return this.isBalanced(node.left) && this.isBalanced(node.right)
+  }
+
+  rebalance() {
+    let orderedArr = []
+    this.inOrder((value) => orderedArr.push(value), tree.root)
+    this.root = this.buildTree(orderedArr)
+  }
 
 }
 
 const tree = new Tree([1, 2, 3, 4, 5, 6, 9])
 
 tree.insert(tree.root, 11)
+tree.insert(tree.root, 12)
 // let findRoot = tree.find(tree.root, 2)
 // console.log(findRoot)
 
@@ -202,8 +219,11 @@ tree.postOrder((value) => {
   // console.log(value)
 })
 
-// tree.preOrder((value) => console.log(value), tree.root)
+
 // tree.delete(tree.root, 3)
+
+console.log(tree.isBalanced(tree.root.right))
+tree.rebalance()
 
 console.log(tree.height(tree.root, 11))
 const prettyPrint = (node, prefix = '', isLeft = true) => {
