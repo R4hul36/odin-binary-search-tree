@@ -6,15 +6,16 @@ class Node {
   }
 }
 
-class Tree {
+export class Tree {
   constructor(arr) {
     this.root = this.buildTree(arr)
   }
 
   buildTree(arr, start = 0, end = arr.length - 1) {
-    // console.log(start, end)
-
+   console.log(start, end)
+   
     if (start > end) {
+      console.log("yess");
       return null
     }
     let mid = Math.floor((start + end) / 2)
@@ -29,6 +30,9 @@ class Tree {
   }
 
   insert(root, value) {
+    // console.log(root)
+    // console.log(value);
+    
     if (root === null) {
       return new Node(value)
     }
@@ -202,42 +206,10 @@ class Tree {
 
   rebalance() {
     let orderedArr = []
-    this.inOrder((value) => orderedArr.push(value), tree.root)
+    this.inOrder((value) => orderedArr.push(value), this.root)
     this.root = this.buildTree(orderedArr)
   }
 
 }
 
-const tree = new Tree([1, 2, 3, 4, 5, 6, 9])
 
-tree.insert(tree.root, 11)
-tree.insert(tree.root, 12)
-// let findRoot = tree.find(tree.root, 2)
-// console.log(findRoot)
-
-tree.postOrder((value) => {
-  // console.log(value)
-})
-
-
-// tree.delete(tree.root, 3)
-
-console.log(tree.isBalanced(tree.root.right))
-tree.rebalance()
-
-console.log(tree.height(tree.root, 11))
-const prettyPrint = (node, prefix = '', isLeft = true) => {
-  if (node === null) {
-    return
-  }
-
-  if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false)
-  }
-  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`)
-  if (node.left !== null) {
-    prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true)
-  }
-}
-
-console.log(prettyPrint(tree.root))
