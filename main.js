@@ -1,37 +1,58 @@
 import { Tree } from "./BinarySearchTree.js";
 
-// const tree = new Tree([1, 2, 3, 4, 5, 6, 9])
-
-// tree.insert(tree.root, 11)
-// tree.insert(tree.root, 12)
-// let findRoot = tree.find(tree.root, 2)
-// console.log(findRoot)
-
-// tree.postOrder((value) => {
-//   // console.log(value)
-// })
-
-
-// tree.delete(tree.root, 3)
-
-// console.log(tree.isBalanced(tree.root))
-// tree.rebalance()
-
-// console.log(tree.height(tree.root, 11))
-
-function createArray() {
-    let newArr = []
-    for(let i =0; i<10; i++) {
-        newArr.push(Math.floor(Math.random()*100))
-    }
-    const newSet = new Set(newArr)
-    return [...newSet]
+function createRandomArr (size) {
+  let arr = []
+  for(let i =0; i<size; i++) {
+    arr.push(Math.floor(Math.random()*100))
+  }
+  return arr.sort()
 }
 
-// console.log(createArray());
+const tree = new Tree(createRandomArr(10))
+console.log(tree.isBalanced(tree.root))
+
+// tree.levelOrderForEach((value) => console.log(value)
+// , tree.root)
+
+process.stdout.write("Pre-order: ")
+tree.preOrder((value)=> process.stdout.write(`${value.toString()}, `), tree.root)
+console.log("\n");
+
+process.stdout.write("In-order: ")
+tree.inOrder((value)=> process.stdout.write(`${value.toString()}, `), tree.root)
+console.log("\n");
+
+process.stdout.write("Post-order: ")
+tree.postOrder((value)=> process.stdout.write(`${value.toString()}, `), tree.root)
+console.log("\n");
 
 
-const tree = new Tree(createArray())
+tree.insert(tree.root, 111)
+tree.insert(tree.root, 113)
+tree.insert(tree.root, 115)
+tree.insert(tree.root, 135)
+tree.insert(tree.root, 151)
+
+
+console.log(tree.isBalanced(tree.root))
+
+tree.rebalance()
+
+
+console.log(tree.isBalanced(tree.root))
+
+process.stdout.write("Pre-order: ")
+tree.preOrder((value)=> process.stdout.write(`${value.toString()}, `), tree.root)
+console.log("\n");
+
+process.stdout.write("In-order: ")
+tree.inOrder((value)=> process.stdout.write(`${value.toString()}, `), tree.root)
+console.log("\n");
+
+process.stdout.write("Post-order: ")
+tree.postOrder((value)=> process.stdout.write(`${value.toString()}, `), tree.root)
+console.log("\n");
+
 
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {

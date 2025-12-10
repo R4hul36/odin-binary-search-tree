@@ -12,10 +12,9 @@ export class Tree {
   }
 
   buildTree(arr, start = 0, end = arr.length - 1) {
-   console.log(start, end)
+  //  console.log(start, end, arr)
    
     if (start > end) {
-      console.log("yess");
       return null
     }
     let mid = Math.floor((start + end) / 2)
@@ -93,6 +92,10 @@ export class Tree {
     // console.log(root);
   }
   levelOrderForEach(callback, root) {
+    if(!callback) {
+      throw new Error("Provide a callback function as argument");
+      
+    }
     if (root === null) {
       return
     }
@@ -111,6 +114,10 @@ export class Tree {
   }
 
   levelOrderForEachRecursion(callback, queue = [this.root]) {
+    if(!callback) {
+      throw new Error("Provide a callback function as argument");
+      
+    }
     if (queue.length === 0) {
       return
     }
@@ -126,6 +133,10 @@ export class Tree {
   }
 
   preOrder(callback, root = this.root) {
+    if(!callback) {
+      throw new Error("Provide a callback function as argument");
+      
+    }
     if (root === null) {
       return
     }
@@ -135,6 +146,10 @@ export class Tree {
   }
 
   inOrder(callback, root = this.root) {
+    if(!callback) {
+      throw new Error("Provide a callback function as argument");
+      
+    }
     if (root === null) {
       return
     }
@@ -145,6 +160,10 @@ export class Tree {
   }
 
   postOrder(callback, root = this.root) {
+    if(!callback) {
+      throw new Error("Provide a callback function as argument");
+      
+    }
     if (root === null) {
       return
     }
