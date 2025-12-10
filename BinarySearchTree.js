@@ -92,7 +92,7 @@ export class Tree {
     // console.log(root);
   }
   levelOrderForEach(callback, root) {
-    if(!callback) {
+    if(typeof callback!== "function") {
       throw new Error("Provide a callback function as argument");
       
     }
@@ -114,7 +114,7 @@ export class Tree {
   }
 
   levelOrderForEachRecursion(callback, queue = [this.root]) {
-    if(!callback) {
+    if(typeof callback!== "function") {
       throw new Error("Provide a callback function as argument");
       
     }
@@ -133,7 +133,8 @@ export class Tree {
   }
 
   preOrder(callback, root = this.root) {
-    if(!callback) {
+    
+    if(typeof callback!== "function") {
       throw new Error("Provide a callback function as argument");
       
     }
@@ -146,7 +147,7 @@ export class Tree {
   }
 
   inOrder(callback, root = this.root) {
-    if(!callback) {
+    if(typeof callback!== "function") {
       throw new Error("Provide a callback function as argument");
       
     }
@@ -160,7 +161,7 @@ export class Tree {
   }
 
   postOrder(callback, root = this.root) {
-    if(!callback) {
+    if(typeof callback!== "function") {
       throw new Error("Provide a callback function as argument");
       
     }

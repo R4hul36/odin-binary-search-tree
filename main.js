@@ -5,17 +5,20 @@ function createRandomArr (size) {
   for(let i =0; i<size; i++) {
     arr.push(Math.floor(Math.random()*100))
   }
-  return arr.sort()
+  return arr.sort((a,b) => a-b)
 }
+console.log(createRandomArr(10));
+
 
 const tree = new Tree(createRandomArr(10))
 console.log(tree.isBalanced(tree.root))
 
-// tree.levelOrderForEach((value) => console.log(value)
-// , tree.root)
+process.stdout.write("Level-order: ")
+tree.levelOrderForEach((value) => process.stdout.write(`${value.toString()}, `), tree.root)
+console.log("\n");
 
 process.stdout.write("Pre-order: ")
-tree.preOrder((value)=> process.stdout.write(`${value.toString()}, `), tree.root)
+tree.preOrder((value) => process.stdout.write(`${value.toString()}, `), tree.root)
 console.log("\n");
 
 process.stdout.write("In-order: ")
@@ -38,8 +41,11 @@ console.log(tree.isBalanced(tree.root))
 
 tree.rebalance()
 
-
 console.log(tree.isBalanced(tree.root))
+
+process.stdout.write("Level-order: ")
+tree.levelOrderForEach((value) => process.stdout.write(`${value.toString()}, `), tree.root)
+console.log("\n");
 
 process.stdout.write("Pre-order: ")
 tree.preOrder((value)=> process.stdout.write(`${value.toString()}, `), tree.root)
